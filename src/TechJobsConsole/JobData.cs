@@ -2,6 +2,7 @@
 using System.IO;
 using System.Reflection;
 using System.Text;
+using System;
 
 namespace TechJobsConsole
 {
@@ -48,15 +49,41 @@ namespace TechJobsConsole
             foreach (Dictionary<string, string> row in AllJobs)
             {
                 string aValue = row[column];
-
-                if (aValue.Contains(value))
+                if (aValue.Equals(value, StringComparison.OrdinalIgnoreCase))
                 {
+                    
                     jobs.Add(row);
                 }
             }
 
             return jobs;
         }
+
+        public static List<Dictionary<string, string>> FindByValue(string searchTerm)
+        {
+            LoadData();
+
+            List<Dictionary<string, string>> jobs = new List<Dictionary<string, string>>();
+
+            foreach (Dictionary<string, string> column in AllJobs)
+            {
+                foreach (KeyValuePair<string, string> row in column)
+                {
+                    if (row.Value.Contains(searchTerm))
+                    {
+                        Console.WriteLine(row.Key + row.Value);
+                    }
+                    else
+                    {
+                        Console.WriteLine("Term cannot be found.");
+                    }
+                    
+                    //Hate this so much.
+                }
+            }
+            return jobs;
+        }
+
 
         /*
          * Load and parse data from job_data.csv
