@@ -67,17 +67,14 @@ namespace TechJobsConsole
 
             foreach (Dictionary<string, string> column in AllJobs)
             {
-                foreach (KeyValuePair<string, string> row in column)
+                foreach (string row in column.Keys)
                 {
-                    if (row.Value.Contains(searchTerm))
+                    string value = column[row];
+                    if (value.ToLower().Contains(searchTerm.ToLower()))
                     {
-                        Console.WriteLine(row.Key + row.Value);
+                        jobs.Add(column);
+                        break;
                     }
-                    else
-                    {
-                        Console.WriteLine("Term cannot be found.");
-                    }
-                    
                     //Hate this so much.
                 }
             }
