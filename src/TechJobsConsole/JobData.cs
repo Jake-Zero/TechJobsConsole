@@ -49,7 +49,7 @@ namespace TechJobsConsole
             foreach (Dictionary<string, string> row in AllJobs)
             {
                 string aValue = row[column];
-                if (aValue.Equals(value, StringComparison.OrdinalIgnoreCase))
+                if (aValue.ToLower().Contains(value.ToLower()))
                 {
                     
                     jobs.Add(row);
